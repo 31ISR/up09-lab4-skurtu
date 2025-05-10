@@ -1,0 +1,129 @@
+{% extends 'layout.html' %} 
+{% block title %} Вход {% endblock %} 
+{% block content %}
+<section>
+    <h1>Вход</h1>
+    <form class="form-with-validation" action="/users/login/" method="post">
+        {% csrf_token %} 
+        {{ form }}
+        {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}" />
+        {% endif %}
+        <button class="form-submit">Отправить</button>
+    </form>
+</section>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+        color: #5a3a3a;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    section {
+        max-width: 500px;
+        width: 90%;
+        margin: 20px;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    h1 {
+        text-align: center;
+        color: #ff6f61;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(255, 111, 97, 0.2);
+    }
+
+    .form-with-validation {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-with-validation .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .form-with-validation label {
+        font-size: 1.1em;
+        color: #5a3a3a;
+        font-weight: 600;
+    }
+
+    .form-with-validation input,
+    .form-with-validation textarea,
+    .form-with-validation select {
+        padding: 12px;
+        border: 1px solid rgba(255, 111, 97, 0.3);
+        border-radius: 10px;
+        font-size: 1em;
+        color: #5a3a3a;
+        background: rgba(255, 255, 255, 0.9);
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-with-validation input:focus,
+    .form-with-validation textarea:focus,
+    .form-with-validation select:focus {
+        border-color: #ff6f61;
+        outline: none;
+        box-shadow: 0 0 8px rgba(255, 111, 97, 0.3);
+    }
+
+    .form-submit {
+        padding: 12px 24px;
+        background: #ff6f61;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.3s;
+    }
+
+    .form-submit:hover {
+        background: #ff3b2f;
+        transform: translateY(-2px);
+    }
+
+    /* Анимация для плавного появления */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    section {
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    /* Дополнительные стили для красоты */
+    ::selection {
+        background: #ff6f61;
+        color: #fff;
+    }
+
+    /* Подключение шрифта Poppins */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+</style>
+{% endblock %}
